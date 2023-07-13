@@ -85,11 +85,11 @@ def login_user(user_credentials : OAuth2PasswordRequestForm = Depends(), db : Se
 
 
 
-@app.post("/create", response_model = schemas.UserResponse)
+@app.post("/create", status_code = 201)
 def create_user(user : schemas.User , db : Session = Depends(get_db)) :
     user.password = utils.hash(user.password)
     print(user)
-    new_user = models.User(**user.dict())
+    new_user = models.User(**user.model_dump())
     print(new_user)
     db.add(new_user)
     try :
