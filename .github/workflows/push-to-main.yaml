@@ -37,7 +37,6 @@ jobs:
     
       - name: Alembic upgrade if there was changes in alembic directory
         id: alembic-upgrade
-        if: ${{ steps.changed-files-alembic.outputs.any_changed == 'true' }}
         run: |
           echo -e "URL=${{ secrets.PROD_DB_URL }}\nSECRET_TOKEN==${{ secrets.PROD_SECRET_TOKEN }}" > ./app/.env
           alembic upgrade head 
