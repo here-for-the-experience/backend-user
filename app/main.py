@@ -6,33 +6,7 @@ from . import models, database
 app = FastAPI()
 
 origins = [
-    "http://dev.redevops.store",
-    "http://redevops.store",
-    "http://dev.api.redevops.store",
-    "http://api.redevops.store",
-    "http://dev.auth.redevops.store",
-    "http://auth.redevops.store",
-    "http://dev.admin.redevops.store",
-    "http://admin.redevops.store",
-
-    "https://dev.redevops.store",
-    "https://redevops.store",
-    "https://dev.api.redevops.store",
-    "https://api.redevops.store",
-    "https://dev.auth.redevops.store",
-    "https://auth.redevops.store",
-    "https://dev.admin.redevops.store",
-    "https://admin.redevops.store",
-    
-    "http://localhost",
-    "http://localhost:8001",
-    "http://localhost:8004",
-    "http://localhost:5173",
-
-    "http://127.0.0.1",
-    "http://127.0.0.1:8001",
-    "http://127.0.0.1:8004",
-    "http://127.0.0.1:5173"
+    "*"
 ]
 
 app.add_middleware(
