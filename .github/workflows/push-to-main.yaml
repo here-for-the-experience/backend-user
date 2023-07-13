@@ -59,7 +59,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Deployment update"
-          git push https://$USERNAME:$REPO_KEY@github.com/hfte/deployment.git # NEEDS CHANGES HERE
+          git push https://$USERNAME:$REPO_KEY@github.com/here-for-the-experience/deployment.git # NEEDS CHANGES HERE
         env:
           REPO_KEY: ${{secrets.PAT_TOKEN}}
           USERNAME: github-actions[bot]
