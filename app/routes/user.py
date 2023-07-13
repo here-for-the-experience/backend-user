@@ -8,6 +8,7 @@ from starlette.responses import JSONResponse
 from random import randrange
 from ..utils import send_email, send_text, mobile_number_verification
 from pydantic import EmailStr
+
 router = APIRouter(
     prefix = "/users",
     tags = ["users"]
