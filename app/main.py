@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from starlette.middleware.cors import CORSMiddleware
 from .routes import user, auth
 
@@ -86,7 +86,7 @@ def login_user(user_credentials : OAuth2PasswordRequestForm = Depends(), db : Se
 
 
 @app.post("/create", response_model = schemas.UserResponse)
-def create_user(user : schemas.User , db : Session = Depends(get_db)) :
+def create_user(user : schemas.User = Form(...) , db : Session = Depends(get_db)) :
     user.password = utils.hash(user.password)
     new_user = models.User(**user.dict())
     db.add(new_user)
