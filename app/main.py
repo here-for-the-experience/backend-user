@@ -56,7 +56,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -88,13 +88,13 @@ def login_user(user_credentials : OAuth2PasswordRequestForm = Depends(), db : Se
 @app.post("/create", response_model = schemas.UserResponse, status_code = 201)
 def create_user(user : schemas.User, db : Session = Depends(get_db)) :
     user.password = utils.hash(user.password)
-    new_user = models.User(**user.dict())
+    new_user = models.User(**user.model_dump())
     db.add(new_user)
     try :
         db.commit()
     except :
         raise HTTPException( status_code = 400, detail = { "message" : "an user with the provided email already exists"})
-    db.refresh(new_user)
+    # db.refresh(new_user)
     return new_user
 
 # @router.put("/update", status_code = 201, tags=["users"], response_model = schemas.UserResponse)
