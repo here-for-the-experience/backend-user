@@ -9,7 +9,6 @@ class User(BaseModel) :
     address : Optional[str] = None
     nid : str
     phone_number : str
-    verified : Optional[bool] = True
 
 
 class VerificationCode(BaseModel) :

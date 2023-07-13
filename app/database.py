@@ -11,7 +11,7 @@ url = os.getenv("URL")
 # Create the database engine
 engine = create_engine(url)
 # Create a base class for declarative models
-SessionLocal = sessionmaker(autocommit = False, autoflush = False, bind = engine)
+SessionLocal = sessionmaker(autocommit = False, autoflush = True, bind = engine)
 Base = declarative_base()
 
 def get_db() :
