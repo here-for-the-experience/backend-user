@@ -43,9 +43,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/", tags=["Home"]) 
-def home() :
-    return { "message" : "Hello"}
-
 app.include_router(user.router) # Include the user related routes
 app.include_router(auth.router) # Include the auth related routes
+
+# @app.get("/", tags=["Home"]) 
+# def home() :
+#     return { "message" : "Hello"}
+
