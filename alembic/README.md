@@ -1,1 +1,1 @@
-# Generic single-database configuration. v1
+# Generic single-database configuration. v2
