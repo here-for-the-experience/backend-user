@@ -50,7 +50,7 @@ jobs:
       -
         name: Modify Deployment File
         run: |
-          sed -i 's/magpie-auth:.*/hfte-auth:${{ github.run_number }}/g' environments/prod/auth/deployment.yaml   # NEEDS CHANGES HERE
+          sed -i 's/hfte-auth:.*/hfte-auth:${{ github.run_number }}/g' environments/prod/auth/deployment.yaml   # NEEDS CHANGES HERE
 
       -
         name: Push changes of deployment
