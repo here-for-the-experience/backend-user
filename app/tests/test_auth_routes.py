@@ -9,11 +9,11 @@ ENDPOINT = "http://127.0.0.1:8000"
 @pytest.mark.parametrize(
     "path,method",
     [
-        (f"{ENDPOINT}/users/create", "POST"),
-        # (f"{ENDPOINT}/users/update", "PUT"),
-        (f"{ENDPOINT}/users/profile", "GET"),
-        (f"{ENDPOINT}/users/forgot", "POST"),
-        (f"{ENDPOINT}/users/validate", "POST"),
+        (f"{ENDPOINT}/create", "POST"),
+        # (f"{ENDPOINT}/update", "PUT"),
+        (f"{ENDPOINT}/profile", "GET"),
+        (f"{ENDPOINT}/forgot", "POST"),
+        (f"{ENDPOINT}/validate", "POST"),
         (f"{ENDPOINT}/login", "POST"),
 
         

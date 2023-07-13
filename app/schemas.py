@@ -9,7 +9,6 @@ class User(BaseModel) :
     address : Optional[str] = None
     nid : str
     phone_number : str
-    verified : Optional[bool] = True
 
 
 class VerificationCode(BaseModel) :
@@ -20,6 +19,7 @@ class UserResponse(BaseModel) :
     id : int
     name : str
     email : EmailStr
+    role_id: int
     nid : str
     verified : bool
     class Config :
