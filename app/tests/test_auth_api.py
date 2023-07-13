@@ -24,8 +24,8 @@ def test_create_user():
     # Test the creation of a new user
     user_data = generate_user()
     response = client.post(ENDPOINT + "/create", json = user_data)
-    assert response.status_code == 201
-    user = response.json()
+    assert response.status_code == 200
+    user = response.json()[0]
     assert user["email"] == user_data["email"]
     assert user["id"] != None
     
@@ -65,7 +65,7 @@ def test_user_forgot_password():
     # Test the "forgot password" functionality
     user_data = generate_user()
     response = client.post(ENDPOINT + "/create", json = user_data)
-    user = response.json()
+    user = response.json()[0]
     response = client.post(ENDPOINT + "/forgot", data = { "email" : user["email"] })
     assert response.status_code == 200
     assert response.json()['message'] == 'Verification Code Sent successfully'
