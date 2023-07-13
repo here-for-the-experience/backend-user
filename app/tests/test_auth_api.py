@@ -13,7 +13,12 @@ def generate_user() :
         "name" : "Fahim Shakil",
         "email": f"test@example{random_number}.com",
         "password": "password123",
-        "mobile_number" : "01913235959"
+        "address" : "Dhaka, Bangladesh",
+        "city" : "Dhaka",
+        "center" : "Hospital 1",
+        "nid" : "583465746538736",
+        "verified" : False,
+        "phone_number" : "01913235959"
     }
 
 
@@ -34,6 +39,7 @@ def test_update_user():
     # Authenticate the user and obtain an access token
     token = client.post(ENDPOINT + "/login", data = { "username" : user_data["email"], "password" : user_data["password"] })
     token = token.json()
+    print(token)
     assert token["access_token"] != None
     assert token["token_type"] == "Bearer"
     # Update the user's password with a new value
@@ -55,18 +61,6 @@ def test_get_user_profile():
     assert response.status_code == 200
     user = response.json()
     assert user["email"] == user_data["email"]
-
-def test_get_all_user_profiles():
-    # Test retrieving all user profiles
-    user_data = generate_user()
-    response = client.post(ENDPOINT + "/users/create", json = user_data)
-    token = client.post(ENDPOINT + "/login", data = { "username" : user_data["email"], "password" : user_data["password"] })
-    token = token.json()
-    # Retrieve all user profiles using the access token
-    response = client.get(ENDPOINT + "/users/all", headers = { "Authorization" : f"Bearer {token['access_token']}" })
-    assert response.status_code == 200
-    users = response.json()
-    assert len(users) > 0
     
 
 def test_user_forgot_password():
@@ -86,7 +80,14 @@ def test_user_validate():
     assert response.json()['detail']['message'] == 'Invalid Code Provided'
 
 
-
+def test_cities() :
+    response = client.get(ENDPOINT + "/users/city")
+    assert response.status_code == 200
+    
+# def test_center() :
+#     response = client.get(ENDPOINT + "/users/center")
+#     assert response.status_code == 200
+    
 
 
 

@@ -40,11 +40,6 @@ def get_user(db : Session = Depends(get_db), token_data : dict = Depends(get_cur
     user = db.query(models.User).filter(models.User.id == token_data.id).first()
     return user
 
-@router.get("/all", response_model = List[schemas.UserResponse], status_code = 200)
-def get_user(db : Session = Depends(get_db), token_data : dict = Depends(get_current_user)) :
-    users = db.query(models.User).all()
-    return users
-
 @router.post("/forgot")
 async def forgot_password( email : str = Form(...), db : Session = Depends(get_db) ) :
     global code
@@ -53,7 +48,7 @@ async def forgot_password( email : str = Form(...), db : Session = Depends(get_d
     if user is None :
         raise HTTPException(status_code = 500, detail = "User Not Found")
     try :
-        send_text(user.mobile_number, code)
+        send_text(user.phone_number, code)
     except :
         raise HTTPException(status_code = 500, detail = "Try Again A Few Moments Later")
     return JSONResponse(status_code = 200, content = { "message": "Verification Code Sent successfully" })
