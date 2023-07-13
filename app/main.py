@@ -86,9 +86,11 @@ def login_user(user_credentials : OAuth2PasswordRequestForm = Depends(), db : Se
 
 
 @app.post("/create", response_model = schemas.UserResponse)
-def create_user(user : schemas.User = Form(...) , db : Session = Depends(get_db)) :
+def create_user(user : schemas.User , db : Session = Depends(get_db)) :
     user.password = utils.hash(user.password)
+    print(user)
     new_user = models.User(**user.dict())
+    print(new_user)
     db.add(new_user)
     try :
         db.commit()
@@ -96,7 +98,7 @@ def create_user(user : schemas.User = Form(...) , db : Session = Depends(get_db)
         raise HTTPException( status_code = 400, detail = { "message" : "an user with the provided email already exists"})
     db.refresh(new_user)
     return {
-        "user" : new_user,
+        new_user,
     }
 
 # @router.put("/update", status_code = 201, tags=["users"], response_model = schemas.UserResponse)
