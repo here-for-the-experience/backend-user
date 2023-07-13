@@ -20,6 +20,7 @@ class UserResponse(BaseModel) :
     id : int
     name : str
     email : EmailStr
+    role_id: int
     nid : str
     verified : bool
     class Config :
