@@ -94,8 +94,8 @@ def create_user(user : schemas.User , db : Session = Depends(get_db)) :
     db.add(new_user)
     try :
         db.commit()
-    except :
-        raise HTTPException( status_code = 400, detail = { "message" : "an user with the provided email already exists"})
+    except Exception as e :
+        raise HTTPException( status_code = 400, detail = { "message" : e.message})
     db.refresh(new_user)
     return {
         new_user,
