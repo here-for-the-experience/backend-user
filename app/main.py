@@ -43,6 +43,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/", tags=["Home"]) 
 def home() :
     return { "message" : "Hello"}
