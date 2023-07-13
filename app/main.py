@@ -95,7 +95,9 @@ def create_user(user : schemas.User, db : Session = Depends(get_db)) :
     except :
         raise HTTPException( status_code = 400, detail = { "message" : "an user with the provided email already exists"})
     # db.refresh(new_user)
-    return new_user
+    return {
+        "user" : new_user,
+    }
 
 # @router.put("/update", status_code = 201, tags=["users"], response_model = schemas.UserResponse)
 # def update_user(password : str = Form(...), db : Session = Depends(get_db), token_data : dict = Depends(get_current_user)) :
