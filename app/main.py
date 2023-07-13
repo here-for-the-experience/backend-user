@@ -85,7 +85,7 @@ def login_user(user_credentials : OAuth2PasswordRequestForm = Depends(), db : Se
 
 
 
-@app.post("/create", response_model = schemas.UserResponse, status_code = 201)
+@app.post("/create", response_model = schemas.UserResponse)
 def create_user(user : schemas.User, db : Session = Depends(get_db)) :
     user.password = utils.hash(user.password)
     new_user = models.User(**user.model_dump())
