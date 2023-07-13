@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Form, HTTPException
+from fastapi import APIRouter, Depends, Form, HTTPException, Header
 from ..database import get_db
 from .. import models, schemas, utils
 from sqlalchemy.orm import Session
@@ -25,18 +25,20 @@ def create_user(user : schemas.User, db : Session = Depends(get_db)) :
     db.refresh(new_user)
     return new_user
 
-@router.put("/update", status_code = 201, tags=["users"], response_model = schemas.UserResponse)
-def update_user(password : str = Form(...), db : Session = Depends(get_db), token_data : dict = Depends(get_current_user)) :
-    id = token_data.id
-    user_query = db.query(models.User).filter(models.User.id == id)
-    user = user_query.first()
-    user.password = utils.hash(password)
-    user_query.update({ 'email' : user.email, 'password' : user.password }, synchronize_session = False)
-    db.commit()
-    return user_query.first()
+# @router.put("/update", status_code = 201, tags=["users"], response_model = schemas.UserResponse)
+# def update_user(password : str = Form(...), db : Session = Depends(get_db), token_data : dict = Depends(get_current_user)) :
+#     id = token_data.id
+#     user_query = db.query(models.User).filter(models.User.id == id)
+#     user = user_query.first()
+#     user.password = utils.hash(password)
+#     user_query.update({ 'email' : user.email, 'password' : user.password }, synchronize_session = False)
+#     db.commit()
+#     return user_query.first()
     
 @router.get("/profile", response_model = schemas.UserResponse, status_code = 200)
+
 def get_user(db : Session = Depends(get_db), token_data : dict = Depends(get_current_user)) :
+    
     user = db.query(models.User).filter(models.User.id == token_data.id).first()
     return user
 
@@ -61,17 +63,3 @@ def validate_code(code_from_user : int = Form(...)) :
     except :
             raise HTTPException(status_code = 404, detail = { "message" : "Invalid Code Provided" })
     return { "message" : "Code validated successfully" }
-
-
-
-@router.get("/city", status_code = 200)
-def get_user(db : Session = Depends(get_db)) :
-    cities = db.query(models.City).all()
-    return cities
-
-
-@router.get("/center", status_code = 200)
-def get_user(city_id : int, db : Session = Depends(get_db)) :
-    centers = db.query(models.Center).filter(models.Center.city_id == city_id).all()
-    print(centers)
-    return centers

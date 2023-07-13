@@ -14,10 +14,8 @@ def generate_user() :
         "email": f"test@example{random_number}.com",
         "password": "password123",
         "address" : "Dhaka, Bangladesh",
-        "city" : "Dhaka",
-        "center" : "Hospital 1",
         "nid" : "583465746538736",
-        "verified" : False,
+        "verified" : True,
         "phone_number" : "01913235959"
     }
 
@@ -32,22 +30,22 @@ def test_create_user():
     assert user["id"] != None
     
 
-def test_update_user():
-    # Test updating a user's password
-    user_data = generate_user()
-    response = client.post(ENDPOINT + "/users/create", json = user_data)
-    # Authenticate the user and obtain an access token
-    token = client.post(ENDPOINT + "/login", data = { "username" : user_data["email"], "password" : user_data["password"] })
-    token = token.json()
-    print(token)
-    assert token["access_token"] != None
-    assert token["token_type"] == "Bearer"
-    # Update the user's password with a new value
-    new_password = "newpassword456"
-    response = client.put("/users/update", data = { "password" : new_password }, headers = { "Authorization" : f"Bearer {token['access_token']}" })
-    assert response.status_code == 201
-    user = response.json()
-    assert user["email"] == user_data["email"]
+# def test_update_user():
+#     # Test updating a user's password
+#     user_data = generate_user()
+#     response = client.post(ENDPOINT + "/users/create", json = user_data)
+#     # Authenticate the user and obtain an access token
+#     token = client.post(ENDPOINT + "/login", data = { "username" : user_data["email"], "password" : user_data["password"] })
+#     token = token.json()
+#     print(token)
+#     assert token["access_token"] != None
+#     assert token["token_type"] == "Bearer"
+#     # Update the user's password with a new value
+#     new_password = "newpassword456"
+#     response = client.put("/users/update", data = { "password" : new_password }, headers = { "Authorization" : f"Bearer {token['access_token']}" })
+#     assert response.status_code == 201
+#     user = response.json()
+#     assert user["email"] == user_data["email"]
 
 def test_get_user_profile():
     # Test retrieving a user's profile
@@ -80,9 +78,9 @@ def test_user_validate():
     assert response.json()['detail']['message'] == 'Invalid Code Provided'
 
 
-def test_cities() :
-    response = client.get(ENDPOINT + "/users/city")
-    assert response.status_code == 200
+# def test_cities() :
+#     response = client.get(ENDPOINT + "/users/city")
+#     assert response.status_code == 200
     
 # def test_center() :
 #     response = client.get(ENDPOINT + "/users/center")

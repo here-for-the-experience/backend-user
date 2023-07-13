@@ -7,17 +7,10 @@ class User(BaseModel) :
     password : str
     role_id : Optional[int] = 1
     address : Optional[str] = None
-    city : str
-    center : str
     nid : str
     phone_number : str
-    verified : Optional[bool] = False
+    verified : Optional[bool] = True
 
-class City(BaseModel) :
-    name : str
-
-class Center(BaseModel) :
-    name : str
 
 class VerificationCode(BaseModel) :
     user_id : int
@@ -28,7 +21,6 @@ class UserResponse(BaseModel) :
     name : str
     email : EmailStr
     nid : str
-    city : str
     verified : bool
     class Config :
         orm_mode = True
@@ -39,3 +31,4 @@ class Token(BaseModel) :
 
 class TokenData(BaseModel) :
     id : int
+    role_id: int

@@ -11,26 +11,11 @@ class User(Base) :
     password = Column(String, nullable=False)
     role_id = Column(Integer, nullable=False)
     address = Column(String)
-    city = Column(String, nullable=False)
-    center = Column(String, nullable=False)
     nid = Column(String, nullable=False)
     phone_number = Column(String, nullable=False)
-    verified = Column(Boolean, nullable=False)
+    verified = Column(Boolean, nullable=False, default=True)
     created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
 
-class City(Base) :
-    __tablename__ = "city_table"
-    id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String, nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
-
-class Center(Base) :
-    __tablename__ = "center_table"
-    id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String, nullable=False)
-    city_id = Column(Integer, nullable=False)
-    Capacity = Column(Integer, nullable=True, default=2)
-    created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
 
 class VerificationCode(Base) :
     __tablename__ = "verification_code_table"

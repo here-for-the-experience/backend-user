@@ -7,8 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Get the database URL from the environment variable
-# url = os.getenv("URL")
-url = "postgresql://postgres:sudoku-snugness-corrosive@user-db.cygkwmqzngab.us-east-2.rds.amazonaws.com:5432/postgres"
+url = os.getenv("URL")
 # Create the database engine
 engine = create_engine(url)
 # Create a base class for declarative models

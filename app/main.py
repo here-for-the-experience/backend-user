@@ -12,6 +12,8 @@ origins = [
     "http://api.redevops.store",
     "http://dev.auth.redevops.store",
     "http://auth.redevops.store",
+    "http://dev.admin.redevops.store",
+    "http://admin.redevops.store",
 
     "https://dev.redevops.store",
     "https://redevops.store",
@@ -19,6 +21,8 @@ origins = [
     "https://api.redevops.store",
     "https://dev.auth.redevops.store",
     "https://auth.redevops.store",
+    "https://dev.admin.redevops.store",
+    "https://admin.redevops.store",
     
     "http://localhost",
     "http://localhost:8001",

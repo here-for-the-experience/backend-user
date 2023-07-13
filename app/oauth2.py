@@ -26,7 +26,7 @@ def verify_access_token(token : str, credentials_exception) :
         id = payload.get("id")
         if not id :
             raise credentials_exception
-        token_data = schemas.TokenData(id = id)
+        token_data = schemas.TokenData(id = payload.get("id"), role_id = payload.get("role_id"))
     except JWTError :
         raise credentials_exception
     return token_data
