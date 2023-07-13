@@ -28,7 +28,8 @@ class Center(Base) :
     __tablename__ = "center_table"
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=False)
-    city_id = Column(String, nullable=False)
+    city_id = Column(Integer, nullable=False)
+    Capacity = Column(Integer, nullable=True, default=2)
     created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
 
 class VerificationCode(Base) :

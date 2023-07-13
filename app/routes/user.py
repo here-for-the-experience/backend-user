@@ -76,7 +76,7 @@ def get_user(db : Session = Depends(get_db)) :
 
 
 @router.get("/center", status_code = 200)
-def get_user(city_id : str, db : Session = Depends(get_db)) :
+def get_user(city_id : int, db : Session = Depends(get_db)) :
     centers = db.query(models.Center).filter(models.Center.city_id == city_id).all()
     print(centers)
     return centers

@@ -2,19 +2,19 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
+from dotenv import load_dotenv
 from alembic import context
-
+load_dotenv()
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
+url = "postgresql://postgres:sudoku-snugness-corrosive@user-db.cygkwmqzngab.us-east-2.rds.amazonaws.com:5432/postgres"
 config = context.config
-
+config.set_main_option("sqlalchemy.url", url)
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
-url = "postgresql://postgres:sudoku-snugness-corrosive@user-db.cygkwmqzngab.us-east-2.rds.amazonaws.com:5432/postgres"
-config.set_main_option("sqlalchemy.url", url)
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
@@ -26,7 +26,6 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-
 
 
 def run_migrations_offline() -> None:

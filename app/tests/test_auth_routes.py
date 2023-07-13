@@ -16,6 +16,8 @@ ENDPOINT = "http://127.0.0.1:8000"
         (f"{ENDPOINT}/users/forgot", "POST"),
         (f"{ENDPOINT}/users/validate", "POST"),
         (f"{ENDPOINT}/login", "POST"),
+        (f"{ENDPOINT}/users/city", "POST"),
+
         
     ],
 )
